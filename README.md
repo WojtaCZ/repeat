@@ -35,3 +35,8 @@ The clip can be connecter to a standard ARM Debug connector on any nRF DK or pro
 ### Wiznet W5100S driver
 
 The W5100S IC used as a ethernet MAC has no available drivers in Zephyr, thus a [custom driver](zephyr-w5100) needs to be installed in Zephyr, if the ethernet functionality is required.
+
+
+## Software example
+
+A simple [software example](example) is provided, to demonstrate a BLE to MQTT gateway functionality. The repeat board listens to all bluetooth advertisements and sends the MAC address, RSSI and raw data in JSON format to the MQTT broker on topic `/repeat/ble/XX:XX:XX:XX:XX:XX` where _XX:XX:XX:XX:XX:XX_ is MAC address of the sender.
