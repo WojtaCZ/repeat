@@ -1,0 +1,6 @@
+[submodule "zephyr-w5100"]
+	path = zephyr-w5100
+	url = https://github.com/WojtaCZ/zephyr-w5100
+[submodule "repeat-hw"]
+	path = repeat-hw
+	url = https://github.com/WojtaCZ/repeat-hw
