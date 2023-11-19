@@ -1,0 +1,110 @@
+/*
+ * Copyright (c) 2020 Nordic Semiconductor ASA
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/dts-v1/;
+#include <nordic/nrf5340_cpunet_qkaa.dtsi>
+#include "repeat_cpunet-pinctrl.dtsi"
+
+/ {
+	model = "Repeat Network";
+	compatible = "vojtech-vosahlo,repeat-cpunet";
+
+	chosen {
+		zephyr,console = &uart0;
+		zephyr,shell-uart = &uart0;
+		zephyr,uart-mcumgr = &uart0;
+		zephyr,bt-mon-uart = &uart0;
+		zephyr,bt-c2h-uart = &uart0;
+		zephyr,bt-hci-rpmsg-ipc = &ipc0;
+		nordic,802154-spinel-ipc = &ipc0;
+		zephyr,sram = &sram1;
+		zephyr,flash = &flash1;
+		zephyr,code-partition = &slot0_partition;
+		zephyr,ieee802154 = &ieee802154;
+	};
+
+	/* These aliases are provided for compatibility with samples */
+	aliases {
+		watchdog0 = &wdt0;
+	};
+
+	nrf_radio_fem: nrf21540 {
+		compatible = "nordic,nrf21540-fem";
+		tx-en-gpios = <&gpio0 24 GPIO_ACTIVE_HIGH>;
+		rx-en-gpios = <&gpio0 23 GPIO_ACTIVE_HIGH>;
+		pdn-gpios = <&gpio0 26 GPIO_ACTIVE_LOW>;
+		ant-sel-gpios = <&gpio0 25 GPIO_ACTIVE_HIGH>;
+		mode-gpios = <&gpio0 22 GPIO_ACTIVE_HIGH>;
+		supply-voltage-mv = <3300>;
+	};
+
+};
+
+&radio {
+	fem = <&nrf_radio_fem>;
+};
+
+&gpiote {
+	status = "okay";
+};
+
+&gpio0 {
+	status = "okay";
+};
+
+&gpio1 {
+	status = "okay";
+};
+
+&timer0 {
+	status = "okay";
+};
+
+&timer1 {
+	status = "okay";
+};
+
+&timer2 {
+	status = "okay";
+};
+
+&flash1 {
+
+	partitions {
+		compatible = "fixed-partitions";
+		#address-cells = <1>;
+		#size-cells = <1>;
+
+		boot_partition: partition@0 {
+			label = "mcuboot";
+			reg = <0x00000000 0xc000>;
+		};
+		slot0_partition: partition@c000 {
+			label = "image-0";
+			reg = <0x0000C000 0x12000>;
+		};
+		slot1_partition: partition@1e000 {
+			label = "image-1";
+			reg = <0x0001E000 0x12000>;
+		};
+		scratch_partition: partition@30000 {
+			label = "image-scratch";
+			reg = <0x00030000 0xa000>;
+		};
+		storage_partition: partition@3a000 {
+			label = "storage";
+			reg = <0x0003a000 0x6000>;
+		};
+	};
+};
+
+&ieee802154 {
+	status = "okay";
+};
+
+
+/* Include shared RAM configuration file */
+#include "repeat_shared_sram_planning_conf.dts"

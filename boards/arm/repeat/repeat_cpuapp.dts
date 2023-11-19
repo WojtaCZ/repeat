@@ -1,0 +1,35 @@
+/*
+ * Copyright (c) 2020 Nordic Semiconductor ASA
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/dts-v1/;
+#include <nordic/nrf5340_cpuapp_qkaa.dtsi>
+#include "repeat_cpuapp_common.dts"
+
+/ {
+	model = "Repeat Application";
+	compatible = "vojtech-vosahlo,repeat-cpuapp";
+
+	chosen {
+		zephyr,sram = &sram0_image;
+		zephyr,flash = &flash0;
+		zephyr,code-partition = &slot0_partition;
+		zephyr,sram-secure-partition = &sram0_s;
+		zephyr,sram-non-secure-partition = &sram0_ns;
+		
+	};
+
+	nrf_radio_fem: nrf21540 {
+		compatible = "nordic,nrf21540-fem";
+		tx-en-gpios = <&gpio0 24 GPIO_ACTIVE_HIGH>;
+		rx-en-gpios = <&gpio0 23 GPIO_ACTIVE_HIGH>;
+		pdn-gpios = <&gpio0 26 GPIO_ACTIVE_LOW>;
+		ant-sel-gpios = <&gpio0 25 GPIO_ACTIVE_HIGH>;
+		mode-gpios = <&gpio0 22 GPIO_ACTIVE_HIGH>;
+		supply-voltage-mv = <3300>;
+	};
+
+};
+
