@@ -20,10 +20,18 @@ Pin mapping of the MCU can be found bellow. For more information, [the schematic
 
 ## Programming
 
+For programming the device, a [SOICbite](https://github.com/SimonMerrett/SOICbite) connector is used, thus a SOIC8 clip is needed to establish the connection. The provided clip has a white mark, indicating what side should be at the TOP side of the PCB, as seen in figure bellow.
+
 <p align="center">
 <img src="./resources/clip.png" width="800"/>
 </p>
 
+The clip can be connecter to a standard ARM Debug connector on any nRF DK or programmer. **REPEAT needs to be powered externally while being programmed, the debug connector does not serve as a power source.**
+
 ### Board definition
+
+[Board definition files](boards) for the REPEAT board are provided and need to be installed in Zephyr for the board to work. **The provided files are still a work in progress but should be fully functional.**
+
 ### Wiznet W5100S driver
 
+The W5100S IC used as a ethernet MAC has no available drivers in Zephyr, thus a [custom driver](zephyr-w5100) needs to be installed in Zephyr, if the ethernet functionality is required.
