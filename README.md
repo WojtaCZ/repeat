@@ -6,7 +6,7 @@ REPEAT is a device based on the nRF5340, intended to serve as an IoT gateway in 
 <img src="./resources/pcb.png" width="400"/>
 </p>
 
-The device supports Zephyr RTOS. Drivers (for the ethernet interface) and board definition files are provided.
+The device supports Zephyr RTOS. [Drivers](zephyr-w5100) (for the ethernet interface) and [board definition files](boards) are provided.
 
 ## Hardware
 
@@ -19,6 +19,10 @@ Pin mapping of the MCU can be found bellow. For more information, [the schematic
 </p>
 
 ## Programming
+
+<p align="center">
+<img src="./resources/clip.png" width="800"/>
+</p>
 
 ### Board definition
 ### Wiznet W5100S driver
